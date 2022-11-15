@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 public class Board extends JPanel {
     private Timer timer;
@@ -22,10 +23,11 @@ public class Board extends JPanel {
     private Ball ball;
     private Paddle paddle;
     private Brick[] bricks;
-    private Brick[] bricks2;
     private boolean inGame = true;
 
+    Random rand = new Random();
 
+    int upperbound = 10;
 
 
 
@@ -61,18 +63,7 @@ public class Board extends JPanel {
             }
         }
 
-        bricks2 = new Brick[Commons.N_OF_BRICKS2];
 
-        int n = 0;
-
-        for (int m = 0; m < 1; m++) {
-
-            for (int j = 0; j < 1; j++) {
-
-                bricks2[n] = new Brick(j * 47 + 70, m * 10 + 90);
-                n++;
-            }
-        }
 
 
         timer = new Timer(Commons.PERIOD, new GameCycle());
@@ -263,8 +254,11 @@ public class Board extends JPanel {
 
                         ball.setYDir(-1);
                     }
+                    int int_random = rand.nextInt(upperbound);
 
-                    //bricks[i].setDestroyed(true);
+                    if(int_random < 3) {
+                    bricks[i].setDestroyed(true);
+                    }
                 }
             }
         }
